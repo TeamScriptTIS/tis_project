@@ -3,6 +3,7 @@
 	include('conexion/verificar_gestion.php');
 	session_start();
 	include('header.php');
+	//estte es mi codigo
 ?>
 
 
