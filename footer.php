@@ -2,8 +2,8 @@
 		if(!isset($titulo)){
 			header('Location: index.php');
 		}
-		 if(!isset($no_visible_elements) || !$no_visible_elements)	{ ?>
-				<!-- content ends  final del conenido-->
+		if(!isset($no_visible_elements) || !$no_visible_elements){ ?>
+			<!-- content ends  final del conenido-->
 				</div>
 				<?php 
 					include('nav-derecha.php');
@@ -275,10 +275,10 @@ $(document).ready(function() {
 			this.value = firstname + "." + lastname;
 		}
 	});
+
 	//unisoft
 	jQuery.validator.addMethod("firstnames", function( value, element ) {
 		var result = this.optional(element) || value.length >= 3 && /[a-z]/i.test(value) && !/\d/.test(value) && !/-/.test(value) && !/[\!\@\#\$\%\^\&\*\(\)\_\+\-\=\`\~\[\]\{\}\;\'\:\"\,\.\/\<\>\?\*\-\+\\\|]/.test(value);
-
 		return result;
 	}, "El nombre debe tener mínimo 3 caracteres y contener solo caracteres alfabéticos");
 	//unisoft

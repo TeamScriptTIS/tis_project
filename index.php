@@ -3,9 +3,7 @@
 	include('conexion/verificar_gestion.php');
 	session_start();
 	include('header.php');
-	//estte es mi codigo mi sergio
 ?>
-
 
 			<div>
 				<ul class="breadcrumb">
@@ -38,5 +36,5 @@
 					</div>
 				</div><!--/span-->
 			</div><!-- fin row -->
-
+			
 <?php include('footer.php'); ?>

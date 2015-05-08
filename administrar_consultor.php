@@ -89,32 +89,28 @@ include('header.php');
     								<td >".$row["email"]."</td>  ";
                                        $aux= $row["curriculum"];
                                          if(empty($aux)){
-                                             echo "  <td >No</td>  ";
-                                         }
-                                         else{
+                                             echo "  <td> No </td>  ";
+                                         }else{
                                             echo " <td class=\"center\"> <a href=".$row["curriculum"]."> <i class=\"icon-download-alt\"></i> Descargar</a></td>";
                                          }
-                                       $aux= $row["tipo_usuario"];
+                                        $aux= $row["tipo_usuario"];
                                         if($aux=="2"){
                                            echo "<td ><center> <input type=\"radio\" id=b".$identi." name=b".$identi."  checked></center></td>";
-                                         }
-                                         else{
+                                         }else{
                                             echo "<td class=\"center\"><center> <input type=\"radio\" id=b".$identi." name=b".$identi."></center></td>";
-                                        }
+                                          }
                                         $aux= $row["habilitado"]; 
                                         if($aux=="1"){
                                             echo "<td class=\"center\"><center> <input type=\"radio\" id=c".$identi." name=c".$identi." checked></center></td>";
-                                         }
-                                         else{
+                                         }else{
                                             echo "<td class=\"center\"><center> <input type=\"radio\" id=c".$identi." name=c".$identi."></center></td>";
                                         }
                         		 echo "	</tr> ";
                                  $identi++;
                                 }
-                             ?>
+                       ?>
 						  </tbody>
 					  </table>
-
                                <div class="control-group">
 								<div class="controls">
 						         <button name="enviar"type="submit" class="btn btn-primary" id="enviar"><i class="icon-ok"></i> Guardar cambios</button>
