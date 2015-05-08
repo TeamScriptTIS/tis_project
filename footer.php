@@ -411,19 +411,6 @@ $(document).ready(function() {
 <script type="text/javascript" src="js/lib/jshashtable-2.1.js"></script>
 <script type="text/javascript" src="js/frontierCalendar/jquery-frontier-cal-1.3.2.min.js"></script>
 <!--<script type="text/javascript" src="js/manipulacion.js"></script> -->
-
-
-
-
-
-
-
-
-
-
-
-
-
  <?php
  if(strcmp($titulo,"Planificar Tareas Grupo Empresa")==0){
  	include ('jsr/calendarfooter.php');
