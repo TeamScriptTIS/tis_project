@@ -1,48 +1,47 @@
 <?php
-//$titulo="Administrar Grupo Empresas";
-include('conexion/verificar_gestion.php');
-session_start();
-/*------------------VERIFICAR QUE SEAL EL ADMINISTRADOR------------------------*/
-if(isset($_SESSION['nombre_usuario']) && ($_SESSION['tipo']!=2 && $_SESSION['tipo']!=3))
-{/*SI EL QUE INGRESO A NUESTRA PAGINA ES CONSULTOR DE CUALQUIER TIPO*/
-		$home="";
-		switch  ($_SESSION['tipo']){
-				case (5) :
-	                	$home="home_integrante.php";
-	                    break;
-	            case (4) :
-	                	$home="home_grupo.php";
-	                    break;
-	            case (2) :
-	                	$home="home_consultor_jefe.php";
-	                    break;
-	            case (3) :
-	                	$home="home_consultor.php";
-	                    break;
-	            case (1) :
-	                    $home="home_admin.php";
-	                    break;
-	          }
+    //$titulo="Administrar Grupo Empresas";
+    include('conexion/verificar_gestion.php');
+    session_start();
+    /*------------------VERIFICAR QUE SEAL EL ADMINISTRADOR------------------------*/
+    if(isset($_SESSION['nombre_usuario']) && ($_SESSION['tipo']!=2 && $_SESSION['tipo']!=3)){
+        /*SI EL QUE INGRESO A NUESTRA PAGINA ES CONSULTOR DE CUALQUIER TIPO*/
+		$home = "";
+		switch ($_SESSION['tipo']){
+			case (5) :
+            	$home="home_integrante.php";
+                break;
+            case (4) :
+            	$home="home_grupo.php";
+                break;
+            case (2) :
+            	$home="home_consultor_jefe.php";
+                break;
+            case (3) :
+            	$home="home_consultor.php";
+                break;
+            case (1) :
+                $home="home_admin.php";
+                break;
+          }
 		header("Location: ".$home);
-}
-elseif(!isset($_SESSION['nombre_usuario'])){
-	header("Location: index.php");
-}
+    }elseif(!isset($_SESSION['nombre_usuario'])){
+	   header("Location: index.php");
+    }
+
 /*----------------------FIN VERIFICACION------------------------------------*/
-$id_grupoem=$_GET['value'];
+$id_grupoem = $_GET['value'];
 require('lib/fpdf.php');
-class PDF extends FPDF
-{
-    function Footer()
-    {
+
+class PDF extends FPDF{
+    function Footer(){
         $this->SetY(-15);
         $this->SetFont('Arial','I',8);
         $this->SetTextColor(90,90,90);
         $this->Cell(0,10,utf8_decode('Página ').$this->PageNo().'',0,0,'L');
     }
  
-    function Header()
-    {	$id_grupoem=$_GET['value'];
+    function Header(){	
+        $id_grupoem=$_GET['value'];
     	$cons = "SELECT nombre,apellido ,nombre_largo
 				FROM grupo_empresa, usuario
 				WHERE id_grupo_empresa=$id_grupoem AND consultor_tis=id_usuario" ;
@@ -67,7 +66,7 @@ class PDF extends FPDF
     }
 }
     
-    $pdf=new PDF();
+    $pdf = new PDF();
     $pdf->SetMargins(15,18);
     $pdf->AliasNbPages();
     $pdf->AddPage();
