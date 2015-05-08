@@ -6,7 +6,7 @@
 			<!-- content ends  final del conenido-->
 				</div>
 				<?php 
-					include('nav-derecha.php');
+					include('nav_derecha.php');
 				?>	
 		<?php } ?>
 		</div><!--/fluid-row-->

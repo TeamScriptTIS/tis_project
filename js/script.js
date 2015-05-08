@@ -1,8 +1,10 @@
+
 $(document).ready(function() {
+	
 	//actividad 1
-	var newsletter = $("#actividad_1");
-	var inital = newsletter.is(":checked");
-	var topics = $("#actividad_1_topics")[inital ? "removeClass" : "addClass"]("gray");
+	var newsletter  = $("#actividad_1");
+	var inital      = newsletter.is(":checked");
+	var topics      = $("#actividad_1_topics")[inital ? "removeClass" : "addClass"]("gray");
 	var topicInputs = topics.find("input").attr("disabled", !inital);
 	newsletter.click(function() {
 		topics[this.checked ? "removeClass" : "addClass"]("gray");
@@ -10,9 +12,9 @@ $(document).ready(function() {
 	});
 
 	//actividad 3
-	var newsletter_3 = $("#actividad_3");
-	var inital_3 = newsletter_3.is(":checked");
-	var topics_3 = $("#actividad_3_topics")[inital_3 ? "removeClass" : "addClass"]("gray");
+	var newsletter_3  = $("#actividad_3");
+	var inital_3      = newsletter_3.is(":checked");
+	var topics_3      = $("#actividad_3_topics")[inital_3 ? "removeClass" : "addClass"]("gray");
 	var topicInputs_3 = topics_3.find("input").attr("disabled", !inital_3);
 	newsletter_3.click(function() {
 		topics_3[this.checked ? "removeClass" : "addClass"]("gray");

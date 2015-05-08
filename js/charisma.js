@@ -1,9 +1,10 @@
+
 $(document).ready(function(){
 	//themes, change CSS with JS
 	//default theme(CSS) is cerulean, change it if needed
 	var current_theme = $.cookie('current_theme')==null ? 'cerulean' :$.cookie('current_theme');
 	switch_theme(current_theme);
-	
+
 	$('#themes a[data-value="'+current_theme+'"]').find('i').addClass('icon-ok');
 				 
 	$('#themes a').click(function(e){
@@ -36,7 +37,6 @@ $(document).ready(function(){
 		$('.login-box').find('.input-large').removeClass('span10');
 		
 	}
-	
 	
 	//highlight current / active link
 	$('ul.main-menu li a').each(function(){
@@ -419,6 +419,7 @@ function docReady(){
 				}
 		});
 		
+
 
 
 		$("#sincos").bind("plotclick", function (event, pos, item) {

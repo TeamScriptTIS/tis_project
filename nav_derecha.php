@@ -3,11 +3,10 @@
 		if(!isset($titulo)){
 			header('Location: index.php');
 		}
-
 ?>
+
 			<div class="span2">
-				<?php if ($sesion_valida) /*SI LA SESION EL VALIDA MOSTRAR*/
-				{ ?>
+				<?php if ($sesion_valida) /*SI LA SESION EL VALIDA MOSTRAR*/{ ?>
 					<div class="box" style="margin-top:0;">
 						<div class="box-header well">
 							<h3><i class="icon-check"></i> Notificaciones</h3>
@@ -18,39 +17,37 @@
 						<div class="box-content">
                         <?php
                         	if ($gestion_valida) {
-                        		
-                        	$usuario=$_SESSION['id'];
-                        	$c = "SELECT COUNT(*) as numer
-                     		FROM notificacion
-                     		WHERE usuario_destino = '$usuario' AND fecha <= '$fin_gestion 23:59:59' AND fecha>='$ini_gestion 00:00:01' AND leido=0";
-	               			$r = mysql_query($c);
-	               			$res = mysql_fetch_array( $r);
-	               			$num=  $res['numer'];
-                          if($_SESSION['tipo']==1) {
-                                include("./conexion/notificaciones_admin.php");
-                          }
-                         elseif (($_SESSION['tipo']==2 || $_SESSION['tipo']==3)) {
-                         	if ($num>0) {
-                         		echo "<ul class=\"dashboard-list\">
-	                  				<li>Consultor TIS tiene ".$num." notificacion(es) no le&iacute;da(s). Puede ver sus notificaciones <b><a href='notificaciones.php'>aqu&iacute;</a></b></li>
-	                  			</ul>";
-                         	}else{
-                         		echo "<ul class=\"dashboard-list\">
-	                  				<li>Consultor TIS no tiene ninguna notificaci&oacute;n nueva.</li>
-	                  			</ul>";
-                         	}
-                         	
-                         }elseif ($_SESSION['tipo']==4 ) {
-                         	if ($num>0) {
-                         		echo "<ul class=\"dashboard-list\">
+                        		$usuario=$_SESSION['id'];
+                        		$c = "SELECT COUNT(*) as numer
+                     				  FROM notificacion
+                 					  WHERE usuario_destino = '$usuario' AND fecha <= '$fin_gestion 23:59:59' AND fecha>='$ini_gestion 00:00:01' AND leido=0";
+	               				$r   = mysql_query($c);
+	               				$res = mysql_fetch_array( $r);
+	               				$num = $res['numer'];
+
+                          		if($_SESSION['tipo']==1) {
+                                	include("./conexion/notificaciones_admin.php");
+                          		}elseif (($_SESSION['tipo']==2 || $_SESSION['tipo']==3)) {
+                         			if ($num>0) {
+                         				echo "<ul class=\"dashboard-list\">
+	                  						<li>Consultor TIS tiene ".$num." notificacion(es) no le&iacute;da(s). Puede ver sus notificaciones <b><a href='notificaciones.php'>aqu&iacute;</a></b></li>
+	                  					</ul>";
+                         			}else{
+                         				echo "<ul class=\"dashboard-list\">
+	                  					<li>Consultor TIS no tiene ninguna notificaci&oacute;n nueva.</li>
+	                  					</ul>";
+                         			}
+                         	}elseif ($_SESSION['tipo']==4 ) {
+                         		if ($num > 0) {
+                         			echo "<ul class=\"dashboard-list\">
 	                  				<li>Jefe Grupo Empresa tiene ".$num." notificacion(es) no le&iacute;da(s). Puede ver sus notificaciones <b><a href='notificaciones.php'>aqu&iacute;</a></b></li>
-	                  			</ul>";
-                         	}else{
-                         		echo "<ul class=\"dashboard-list\">
+	                  				</ul>";
+                         		}else{
+                         			echo "<ul class=\"dashboard-list\">
 	                  				<li>Jefe Grupo Empresa no tiene ninguna notificaci&oacute;n nueva.</li>
-	                  			</ul>";
-                         	}
-                         }else{?>
+	                  				</ul>";
+                         		}
+                     	}else{?>
 	                  		<ul class="dashboard-list">
 	                  			<li>Espacio no disponible.</li>
 	                  		</ul>
@@ -123,7 +120,7 @@
 						</div>
 						<div class="box-content">
 	                  		<form class="form" action="conexion/verificar.php" method="post">
-									<input name="tipo" value=4 type="hidden"><!-- CAMPO HIDDEN PARA GRUPO CAMBIAR¡¡-->						
+									<input name = "tipo" value = 4 type = "hidden"><!-- CAMPO HIDDEN PARA GRUPO CAMBIAR¡¡-->						
 									<div class="input-prepend">
 										<span class="add-on"><i class="icon-user"></i></span><input placeholder="Grupo Empresa" class="input-large span10" name="username" id="username" type="text"  />
 									</div>
@@ -137,7 +134,6 @@
 									<p class="center">
 									<button type="submit" class="btn btn-primary">Ingresar</button>
 									</p>
-								
 							</form>            
 		                  </div>
 				</div><!--/FORMULARIO DE INGRESO-->
