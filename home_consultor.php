@@ -1,11 +1,11 @@
 <?php 
-$titulo="P&aacute;gina de inicio Consultor TIS";
-include("conexion/verificar_gestion.php");
-session_start();
+	$titulo = "P&aacute;gina de inicio Consultor TIS";
+	include("conexion/verificar_gestion.php");
+	session_start();
 /*------------------VERIFICAR QUE SEAL EL CONSULTOR------------------------*/
-if(isset($_SESSION['nombre_usuario']) && $_SESSION['tipo']!=3)
-{/*SI EL QUE INGRESO A NUESTRA PAGINA ES CONSULTOR DE CUALQUIER TIPO*/
-		$home="";
+	if(isset($_SESSION['nombre_usuario']) && $_SESSION['tipo']!=3){
+/*SI EL QUE INGRESO A NUESTRA PAGINA ES CONSULTOR DE CUALQUIER TIPO*/
+		$home = "";
 		switch  ($_SESSION['tipo']){
 				case (5) :
 	                	$home="home_integrante.php";
@@ -19,15 +19,16 @@ if(isset($_SESSION['nombre_usuario']) && $_SESSION['tipo']!=3)
 	            case (1) :
 	                    $home="home_admin.php";
 	                    break;                                                             		
-	          }   
+      	}   
 		header("Location: ".$home);
-}
-elseif(!isset($_SESSION['nombre_usuario'])){
-	header("Location: index.php");
-}
+	}elseif(!isset($_SESSION['nombre_usuario'])){
+		header("Location: index.php");
+	}
+
 /*----------------------FIN VERIFICACION------------------------------------*/
-include('header.php');
- ?>
+	include('header.php');
+?>
+
 			<div>
 				<ul class="breadcrumb">
 					<li>
@@ -53,14 +54,14 @@ include('header.php');
 							 inscritas con usted dejaran preguntas o dudas esperando su respuesta.
 							<br><br>
 					</span>					
-					<?php }
-					else { 
-							echo "<div align=\"center\">
-				                        <h4><i class=\"icon-info-sign\"></i>
-				                        La gesti&oacute;n no est&aacute; disponible, contacte con el administrador del sistema.</h4>
-				                      	</div>";
-
-						 }	?>						
+			<?php 
+				}else{ 
+					echo "<div align=\"center\">
+	                        <h4><i class=\"icon-info-sign\"></i>
+    			                La gesti&oacute;n no est&aacute; disponible, contacte con el administrador del sistema.</h4>
+	                      	</div>";
+				 }	
+			 ?>						
 					</div>	
 				</div><!--/span-->  
 			</div><!-- fin row -->

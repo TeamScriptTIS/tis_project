@@ -94,6 +94,7 @@ include('header.php');
 			</div><!-- fin row -->
 
 <script stype="text/javascript">
+//Codigo AJAX
 			function ventanachat(){
 				var xmlHttp;
 				if (window.XMLHttpRequest)

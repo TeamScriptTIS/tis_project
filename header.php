@@ -2,10 +2,12 @@
 	if(!isset($titulo)){
 		header('Location: index.php');
 	}
+
 	if (isset($_SESSION['nombre_usuario'])){
-		$sesion_valida=true;
-		$nombre_usuario=$_SESSION['nombre_usuario'];
-		$id_usuario=$_SESSION['id'];
+		$sesion_valida  = true;
+		$nombre_usuario = $_SESSION['nombre_usuario'];
+		$id_usuario     = $_SESSION['id'];
+
 		switch  ($_SESSION['tipo']){
 				case (5) :
                 	$tipo="Integrante Grupo Empresa";
@@ -23,11 +25,12 @@
                     $tipo ="Administrador";
                     break;
           }
-	}
-	else{
-		$sesion_valida=false;
+	}else{
+		$sesion_valida = false;
 	}
 ?>
+
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -35,7 +38,6 @@
 	<title><?php if(isset($titulo)) {echo $titulo;} else{ echo "Sistema de Apoyo a la Empresa TIS";} ?></title>
 	<meta name="description" content="Sistema de Apoyo a la Empresa TIS">
 	<meta name="author" content="TIS">
-
 
 	<!-- The styles -->
 	<link id="bs-css" href="css/bootstrap-cerulean.css" rel="stylesheet">

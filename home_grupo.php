@@ -1,145 +1,153 @@
 <?php
-$titulo="P&aacute;gina de inicio Grupo Empresas";
-include("conexion/verificar_gestion.php");
-session_start();
-/*------------------VERIFICAR QUE SEAL LA GRUPO EMPRESA------------------------*/
-if(isset($_SESSION['nombre_usuario']) && $_SESSION['tipo']!=4)
-{/*SI EL QUE INGRESO A NUESTRA PAGINA ES CONSULTOR DE CUALQUIER TIPO*/
-		$home="";
+	$titulo = "P&aacute;gina de inicio Grupo Empresas";
+	include("conexion/verificar_gestion.php");
+	session_start();
+	/*------------------VERIFICAR QUE SEAL LA GRUPO EMPRESA------------------------*/
+	if(isset($_SESSION['nombre_usuario']) && $_SESSION['tipo'] != 4){
+		/*SI EL QUE INGRESO A NUESTRA PAGINA ES CONSULTOR DE CUALQUIER TIPO*/
+		$home = "";
 		switch  ($_SESSION['tipo']){
 				case (5) :
-	                	$home="home_integrante.php";
+	                	$home = "home_integrante.php";
 	                    break;
 	            case (3) :
-	                	$home="home_consultor.php";
+	                	$home = "home_consultor.php";
 	                    break;
 	            case (2) :
-	                	$home="home_consultor_jefe.php";
+	                	$home = "home_consultor_jefe.php";
 	                    break;
 	            case (1) :
-	                    $home="home_admin.php";
+	                    $home = "home_admin.php";
 	                    break;                                                             		
 	          }   
 		header("Location: ".$home);
-}
-elseif(!isset($_SESSION['nombre_usuario'])){
-	header("Location: index.php");
-}
+	}elseif(!isset($_SESSION['nombre_usuario'])){
+		header("Location: index.php");
+	}
+
 /*----------------------FIN VERIFICACION------------------------------------*/
-include("conexion/verificar_integrantes.php");
-if(!$cantidad_valida && isset($_POST['enviar'])){
-		$error=false;
+	include("conexion/verificar_integrantes.php");
+	
+	if(!$cantidad_valida && isset($_POST['enviar'])){
+		$error = false;
+
 		/*VALORES de usuario*/
-		$id_usuario=$_POST['id_usuario'];
-		$usuario=$_POST['username'];
-		$clave=$_POST['password']; /*$clave = md5($pass); QUITADO ==> CONTRASEÑA SIMPLE*/
-		$eMail=$_POST['email'];
+		$id_usuario = $_POST['id_usuario'];
+		$usuario    = $_POST['username'];
+		$clave      = $_POST['password']; /*$clave = md5($pass); QUITADO ==> CONTRASEÑA SIMPLE*/
+		$eMail      = $_POST['email'];
+
 		/*VALORES de integrante*/
-		$cod_sis = $_POST['codSIS'];
-		$nombre_rep = $_POST['firstname'];
+		$cod_sis      = $_POST['codSIS'];
+		$nombre_rep   = $_POST['firstname'];
 		$apellido_rep = $_POST['lastname'];
 		$telefono_rep = $_POST['telf'];
-		$carrera_rep = $_POST['choose_carrera'];
+		$carrera_rep  = $_POST['choose_carrera'];
+
 		if (isset($_POST['roles'])) {
 			$roles = $_POST['roles'];
-			if (sizeof($roles)==0) {
-				$error=true;
-				$error_rol="Debe seleccionar m&iacute;nimamente un rol";
+			if (sizeof($roles) == 0) {
+				$error     = true;
+				$error_rol = "Debe seleccionar m&iacute;nimamente un rol";
 			}
+		}else{
+			$error     = true;
+			$error_rol = "Debe seleccionar m&iacute;nimamente un rol";
 		}
-		else{
-			$error=true;
-			$error_rol="Debe seleccionar m&iacute;nimamente un rol";
+
+		if ($carrera_rep == '-1' ) {
+			$error         = true;
+			$error_carrera = "Debe seleccionar una carrera";
 		}
-		if ($carrera_rep=='-1' ) {
-			$error=true;
-			$error_carrera="Debe seleccionar una carrera";
-		}
+
 		$consulta_usuario = mysql_query("SELECT nombre_usuario from usuario 
-		                          where nombre_usuario='$usuario' AND (gestion=1 OR gestion=$id_gestion)",$conn)
-		                          or die("Could not execute the select query.");
+		                                 where nombre_usuario='$usuario' AND (gestion=1 OR gestion=$id_gestion)",$conn)
+		                                 or die("Could not execute the select query.");
+
 		$consulta_email = mysql_query("SELECT email from usuario 
-		                         where email='$eMail'AND (gestion=1 OR gestion=$id_gestion)",$conn)
-		                         or die("Could not execute the select query.");
+		                               where email='$eMail'AND (gestion=1 OR gestion=$id_gestion)",$conn)
+		                               or die("Could not execute the select query.");
 		
 		$consulta_cod = mysql_query("SELECT codigo_sis from usuario, integrante 
-								where integrante.usuario=usuario.id_usuario AND codigo_sis='$cod_sis' AND (gestion=1 OR gestion=$id_gestion)",$conn)
-		                         or die("Could not execute the select query."); 
-
-
+								     where integrante.usuario=usuario.id_usuario AND codigo_sis='$cod_sis' AND (gestion=1 OR gestion=$id_gestion)",$conn)
+		                             or die("Could not execute the select query."); 
 
 		$resultado_usuario = mysql_fetch_assoc($consulta_usuario);
-		$resultado_email = mysql_fetch_assoc($consulta_email);
-		$resultado_cod = mysql_fetch_assoc($consulta_cod);
+		$resultado_email   = mysql_fetch_assoc($consulta_email);
+		$resultado_cod     = mysql_fetch_assoc($consulta_cod);
 		
-		  if(is_array($resultado_usuario) && !empty($resultado_usuario))//ya existe usuario o email
-		    {     
-			      if (strcmp($resultado_usuario['nombre_usuario'],$usuario)==0) { 
-			              $error_user="El usuario ya esta registrado";
-			              $error=true;
-			       }   
-	      
-		     }
-		   if(is_array($resultado_email) && !empty($resultado_email)){
-		     	if (strcmp($resultado_email['email'],$eMail)==0) {
-			              $error_email="El correo electr&oacute;nico ya est&aacute; registrado";
-			              $error=true;
-			      } 
-		   }
-		   if(is_array($resultado_cod) && !empty($resultado_cod)){
-		     	if (strcmp($resultado_cod['codigo_sis'],$cod_sis)==0) {
-			              $error_cod="El integrante ya est&aacute; registrado en esta gesti&oacute;n";
-			              $error=true;
-			      } 
-		   }
+		//ya existe usuario o email
+		if(is_array($resultado_usuario) && !empty($resultado_usuario)){     
+	      	if (strcmp($resultado_usuario['nombre_usuario'], $usuario) == 0) { 
+		          $error_user = "El usuario ya esta registrado";
+	              $error      = true;
+       		}
+      	}
 
-		   if(!$error){/*SI NO HAY NINGUN ERROR REGISTRO*/
-		   		/*INSERTAR EL USUARIO*/
+	   	if(is_array($resultado_email) && !empty($resultado_email)){
+	     	if (strcmp($resultado_email['email'],$eMail)==0) {
+		          $error_email = "El correo electr&oacute;nico ya est&aacute; registrado";
+	              $error       = true;
+	      	} 
+	   	}
+
+	   	if(is_array($resultado_cod) && !empty($resultado_cod)){
+	     	if (strcmp($resultado_cod['codigo_sis'],$cod_sis)==0) {
+	              $error_cod = "El integrante ya est&aacute; registrado en esta gesti&oacute;n";
+	              $error     = true;
+	        } 
+	   	}
+
+
+	   	if(!$error){/*SI NO HAY NINGUN ERROR REGISTRO*/
+
+	   		/*INSERTAR EL USUARIO*/
 			$bitacora = mysql_query("CALL iniciar_sesion(".$_SESSION['id'].")",$conn)
 							or die("Error no se pudo realizar cambios.");
-		        $sql = "INSERT INTO usuario (nombre_usuario, clave,nombre,apellido,telefono, email, habilitado, tipo_usuario,gestion)
-		                VALUES ('$usuario','$clave','$nombre_rep','$apellido_rep','$telefono_rep','$eMail',1,5,$id_gestion)";
-		        $result = mysql_query($sql,$conn) or die(mysql_error());
 
-		        /*BUSCAR  el id de la grupo empresa con el id del representante legal*/
-		        $consulta_id_ge = mysql_query("SELECT grupo_empresa
+	        $sql = "INSERT INTO usuario (nombre_usuario, clave,nombre,apellido,telefono, email, habilitado, tipo_usuario,gestion)
+	                VALUES ('$usuario','$clave','$nombre_rep','$apellido_rep','$telefono_rep','$eMail',1,5,$id_gestion)";
+	        $result = mysql_query($sql,$conn) or die(mysql_error());
+
+	        /*BUSCAR  el id de la grupo empresa con el id del representante legal*/
+	        $consulta_id_ge = mysql_query("SELECT grupo_empresa
 											from integrante 
 											where usuario=$id_usuario",$conn)
-		                         or die("Could not execute the select query.");
-		        $resultado_id_ge = mysql_fetch_assoc($consulta_id_ge); 
-		        $rep_id_ge=(int)$resultado_id_ge['grupo_empresa'];
+		      			                   or die("Could not execute the select query.");
+	        $resultado_id_ge = mysql_fetch_assoc($consulta_id_ge); 
+	        $rep_id_ge       = (int)$resultado_id_ge['grupo_empresa'];
 
-				/*BUSCAR  el id del usuario*/
-		        $consulta_id_usu = mysql_query("SELECT id_usuario from usuario where nombre_usuario='$usuario' and gestion=$id_gestion",$conn)
-		                         or die("Could not execute the select query.");
-		        $resultado_id_usu = mysql_fetch_assoc($consulta_id_usu); 
-		        $rep_id_usu=(int)$resultado_id_usu['id_usuario'];
+			/*BUSCAR  el id del usuario*/
+	        $consulta_id_usu = mysql_query("SELECT id_usuario from usuario where nombre_usuario='$usuario' and gestion=$id_gestion",$conn)
+	                         or die("Could not execute the select query.");             
+	        $resultado_id_usu = mysql_fetch_assoc($consulta_id_usu); 
+	        $rep_id_usu       = (int)$resultado_id_usu['id_usuario'];
 				
 				/*INSERTAR AL INTEGRANTE*/
-		   		$sql = "INSERT INTO integrante(usuario,codigo_sis,carrera,grupo_empresa)
-		                VALUES ('$rep_id_usu','$cod_sis','$carrera_rep','$rep_id_ge')";
-		        $result = mysql_query($sql,$conn) or die(mysql_error());
-				
-		        for ($i=0; $i < sizeof($roles) ; $i++) { 
-		        	$id_rol=(int)$roles[$i];
-		        	$sql = "INSERT INTO rol_integrante (integrante,rol)
-		                VALUES ($rep_id_usu,$id_rol)";
-		       		$result = mysql_query($sql,$conn) or die(mysql_error());
+	   		$sql = "INSERT INTO integrante(usuario,codigo_sis,carrera,grupo_empresa)
+	                VALUES ('$rep_id_usu','$cod_sis','$carrera_rep','$rep_id_ge')";
+	        $result = mysql_query($sql,$conn) or die(mysql_error());
 
-		        } 
-		       	header('Location: home_grupo.php');
-		   }
-		}
-		else{
-			$usuario=NULL;
-			$nombre_corto=NULL;
-			$eMail=NULL;
-			$nombre_rep=NULL;
-			$apellido_rep=NULL;
-			$cod_sis=NULL;
-			$telefono_rep=NULL;
-		}
-include('header.php'); ?>
+	        for ($i=0; $i < sizeof($roles) ; $i++) { 
+	        	$id_rol = (int)$roles[$i];
+	        	$sql    = "INSERT INTO rol_integrante (integrante,rol)
+		                   VALUES ($rep_id_usu,$id_rol)";
+	       		$result = mysql_query($sql,$conn) or die(mysql_error());
+	        } 
+	       	header('Location: home_grupo.php');
+	   }
+	}else{
+		$usuario      = NULL;
+		$nombre_corto = NULL;
+		$eMail        = NULL;
+		$nombre_rep   = NULL;
+		$apellido_rep = NULL;
+		$cod_sis      = NULL;
+		$telefono_rep = NULL;
+	}
+
+	include('header.php'); ?>
+
 			<div>
 				<ul class="breadcrumb">
 					<li>
@@ -162,7 +170,8 @@ include('header.php'); ?>
 					<h2><i class="icon-warning-sign"></i> Importante: Agregar Integrante a la Grupo Empresa</h2>					
 					</div>
 					<div class="box-content" id="formulario">
-					<?php	if (!$act_2_espera && $act_2==1) {
+
+					<?php	if (!$act_2_espera && $act_2 == 1) {
 						?>
 						<p><b>Para que su Grupo Empresa quede completamente habilitada debe agregar por lo menos <?php echo $cantidad_faltante; ?> integrantes m&aacute;s.</b></p><br>
 						<form name="form-data" class="form-horizontal cmxform" method="POST" id="signupForm" accept-charset="utf-8" action="home_grupo.php">
@@ -225,13 +234,12 @@ include('header.php'); ?>
 									<select id="choose_carrera" name="choose_carrera" data-rel="chosen">
 										<option value="-1">-- Seleccione una carrera --</option>
 										<?php
-			                               $consulta_carrera = "SELECT *
-														FROM carrera";
-			                               $resultado_carrera = mysql_query($consulta_carrera);
+			                               $consulta_carrera  = "SELECT *
+														         FROM carrera";
+			                               	$resultado_carrera = mysql_query($consulta_carrera);
 			                                while($row_sociedad = mysql_fetch_array($resultado_carrera)) {
 			                               		echo "<option value=\"".$row_sociedad['id_carrera']."\">".$row_sociedad['nombre_carrera']."</option>";
 			                                }
-
 			                             ?>
 								  	</select>
 								  	<label id="error_user" class="error"><?php if(isset($error_carrera)){ echo $error_carrera; } ?></label>
@@ -264,7 +272,6 @@ include('header.php'); ?>
 			                                while($row_sociedad = mysql_fetch_array($resultado_carrera)) {
 			                               		echo "<option value=\"".$row_sociedad['id_rol']."\">".$row_sociedad['nombre']."</option>";
 			                                }
-
 			                             ?>
 									  </select>
 									<label id="error_user" class="error"><?php if(isset($error_rol)){ echo $error_rol; } ?></label>
@@ -279,14 +286,16 @@ include('header.php'); ?>
 						        </fieldset>
 								</form>
 								<?php }else{
-									echo "Lo sentimos pero el registro no est&aacute; habilitado. Puede contactarse con su Consultor TIS
-									asignado para solicitar una ampliaci&oacute;n de la fecha registro.";
-								}	?>
+										echo "Lo sentimos pero el registro no est&aacute; habilitado. Puede contactarse con su Consultor TIS
+										asignado para solicitar una ampliaci&oacute;n de la fecha registro.";
+									}	
+								?>
 								</div>
 							</div>
 						</div>
 			 	
 			<?php }
+
 			else{ ?>
 				<div class="row-fluid">
 				<div class="box span12">
@@ -300,7 +309,8 @@ include('header.php'); ?>
 					</div><!--/span-->
 				</div><!-- fin row -->
 				<?php 
-				if ($numero_integrantes<5 && $act_2==1 && !$act_2_espera) { ?>
+
+				if ($numero_integrantes < 5 && $act_2 == 1 && !$act_2_espera) { ?>
 					<div class="row-fluid">
 					<div class="box span12">
 						<div class="box-header well">
