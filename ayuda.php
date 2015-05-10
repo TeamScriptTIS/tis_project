@@ -29,7 +29,8 @@
 					<div class="alert alert-success">
 							<button type="button" class="close" data-dismiss="alert">×</button>
 							Si necesita ayuda, o tiene problemas con el uso del sistema puede contactarse con el <b>Administrador</b>, sus datos se encuentran a continuaci&oacute;n.
-						</div>
+					</div>
+					
 				<?php				
 						$c = "SELECT nombre,apellido,telefono,email
 			      			FROM usuario
