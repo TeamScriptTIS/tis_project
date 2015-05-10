@@ -1,9 +1,10 @@
 <?php
-$titulo="Ayuda del Sistema de Apoyo a la Empresa TIS";
-include("conexion/verificar_gestion.php");
-session_start();
-include('header.php');
- ?>
+	$titulo="Ayuda del Sistema de Apoyo a la Empresa TIS";
+	include("conexion/verificar_gestion.php");
+	session_start();
+	include('header.php');
+?>
+
 			<div>
 				<ul class="breadcrumb">
 					<li>
@@ -15,9 +16,9 @@ include('header.php');
 					</li>
 				</ul>
 			</div>
+
 			<center><h3>Ayuda del Sistema de Apoyo a la Empresa TIS</h3></center>
 			
-
             <div class="row-fluid">
 			<div class="box span12">
 					<div class="box-header well">
@@ -36,8 +37,7 @@ include('header.php');
 								WHERE tipo_usuario=1";
 	               			$r = mysql_query($c,$conn);
 	               			$resultado = mysql_fetch_assoc($r);
-								if(is_array($resultado) && !empty($resultado))
-								{	
+								if(is_array($resultado) && !empty($resultado)){	
 										$nombre= $resultado['nombre'];
 										$apellido= $resultado['apellido'];
 										$telefono= $resultado['telefono'];
@@ -68,6 +68,4 @@ include('header.php');
 					</div>
 				</div><!--/span-->
 			</div><!-- fin row -->
-
-
 <?php include('footer.php'); ?>
