@@ -1,7 +1,7 @@
 <?php
-$titulo="Administrar Consultores TIS";
-include('conexion/verificar_gestion.php');
-session_start();
+  $titulo = "Administrar Grupo Empresas";
+  include('conexion/verificar_gestion.php');
+  session_start();
 
 /*------------------VERIFICAR QUE SEAL EL ADMINISTRADOR------------------------*/
     if(isset($_SESSION['nombre_usuario']) && $_SESSION['tipo']!=1){
@@ -30,6 +30,7 @@ session_start();
     include('header.php');
  ?>
 
+
  			<!--PARTICIONAR
  			<li>
 						<a href="#">Inicio</a> <span class="divider">/</span>
@@ -55,7 +56,7 @@ session_start();
 					<div class="box-content">
             <?php 
                 include('conexion/conexion.php');
-                 $consulta = "SELECT u.nombre_usuario,u.habilitado,ge.nombre_corto,ge.nombre_largo,s.descripcion,u.id_usuario,u.clave
+                $consulta = "SELECT u.nombre_usuario,u.habilitado,ge.nombre_corto,ge.nombre_largo,s.descripcion,u.id_usuario,u.clave
                               FROM usuario u,integrante i,grupo_empresa ge,sociedad s
                               WHERE  u.tipo_usuario = 4 and u.id_usuario=i.usuario and i.grupo_empresa=ge.id_grupo_empresa and ge.sociedad= s.id_sociedad ";
                  $resultado = mysql_query($consulta);
@@ -78,7 +79,7 @@ session_start();
 						  <tbody>
               <?php
 
-                               $identi=0;
+                               $identi = 0;
                                 while($row = mysql_fetch_array($resultado)) {
                                echo "
                                 <tr>
@@ -89,11 +90,8 @@ session_start();
                                      <td >".$row["nombre_largo"]."</td>
                                      <td >".$row["descripcion"]."</td>
                                      ";
-                                        $aux = $row["habilitado"];
-                                        if($aux=="1"){
+                                        if($row["habilitado"]=="1"){
                                            echo "<td class=\"center\"><center> <input type=\"checkbox\" id=c".$identi." name=c".$identi." checked></center></td>";
-
-                                           //echo "<script type=\"text/javascript\">alert(\"Anuncio subido con éxito\");</script>"; 
                                          }else{
                                             echo "<td class=\"center\"><center> <input type=\"checkbox\" id=c".$identi." name=c".$identi."></center></td>";
                                          }
@@ -103,20 +101,15 @@ session_start();
                              ?>
 						  </tbody>
 					  </table>
-
                       <?php 
                         echo "<input type=\"hidden\" id=count name=count value=".$identi." ></input>"; ?>
                                <div class="control-group">
 								<div class="controls">
-
 						         <button name="enviar"type="submit" class="btn btn-primary" id="enviar"><i class="icon-ok"></i> Guardar cambios </button>
-
 								 <button type="reset" class="btn">Restablecer</button>
-
                                 </div>
 								 </div>
                     </form>
-
                    <?php }
                             else{
                               echo "<div align=\"center\">
@@ -128,5 +121,4 @@ session_start();
 					</div>
 				</div><!--/span-->
 				</div>
-
 <?php include('footer.php'); ?>
