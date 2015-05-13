@@ -9,10 +9,13 @@
     $counta = 0;
     while($counta < $num){
       $a =  $_POST["a".$counta]; //ide usus
-      $c =  0;             //habilitado ?
+      $c =  0;                   //habilitado ?
       if($_POST["c".$counta])
         $c = 1;
       $sql    = "UPDATE usuario SET habilitado='$c' WHERE id_usuario = '$a'";
+      echo "<script>
+        alert('carajoooo');
+      </script>";
       $result = mysql_query($sql);
       $counta++;     
     }

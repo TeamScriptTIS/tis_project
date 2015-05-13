@@ -1,13 +1,13 @@
 <?php
-$titulo="Planificaci&oacute;n de actividades";
-include('conexion/verificar_gestion.php');
-session_start();
-$bitacora = mysql_query("CALL iniciar_sesion(".$_SESSION['id'].")",$conn)
-			or die("Error no se pudo realizar cambios.");
-/*------------------VERIFICAR QUE SEAL EL JEFE CONSULTOR------------------------*/
-if(isset($_SESSION['nombre_usuario']) && $_SESSION['tipo']!=2)
-{/*SI EL QUE INGRESO A NUESTRA PAGINA ES CONSULTOR DE CUALQUIER TIPO*/
-		$home="";
+	$titulo="Planificaci&oacute;n de actividades";
+	include('conexion/verificar_gestion.php');
+	session_start();
+	$bitacora = mysql_query("CALL iniciar_sesion(".$_SESSION['id'].")",$conn)
+				or die("Error no se pudo realizar cambios.");
+	/*------------------VERIFICAR QUE SEAL EL JEFE CONSULTOR------------------------*/
+	if(isset($_SESSION['nombre_usuario']) && $_SESSION['tipo']!=2){
+		/*SI EL QUE INGRESO A NUESTRA PAGINA ES CONSULTOR DE CUALQUIER TIPO*/
+		$home = "";
 		switch  ($_SESSION['tipo']){
 				case (5) :
 	                	$home="home_integrante.php";
@@ -21,7 +21,7 @@ if(isset($_SESSION['nombre_usuario']) && $_SESSION['tipo']!=2)
 	            case (1) :
 	                    $home="home_admin.php";
 	                    break;                                                             		
-	          }   
+      }   
 		header("Location: ".$home);
 }
 elseif(!isset($_SESSION['nombre_usuario'])){
@@ -108,6 +108,7 @@ if (isset($_POST['enviar'])) {//habilidar registro de grupo empresas
 		}
 	}
 }
+
 if (isset($_POST['enviar_1'])) {//lanzamiento convocatoria
 	$error_1=false;
 	if (isset($_POST['inicio_1']) && isset($_POST['fin_1']) && isset($_POST['newsletter_1'])) {
