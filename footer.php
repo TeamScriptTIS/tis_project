@@ -117,13 +117,10 @@
                                        ?>
                 <script language="JavaScript" type="text/javascript">
 						    var nume='<?php  echo $num;  ?>'
-
 							 setTamAviso( 130 );
 							 setNumAvisos( nume );
 							 timerID = setTimeout("moverAvisos()", 1000);
 						    </script>
-
-
              <?php
                 }
             }
@@ -143,8 +140,6 @@
 							 setNumAvisos( nume );
 							 timerID = setTimeout("moverAvisos()", 1000);
 						    </script>
-
-
              <?php
                 }
             }*/
@@ -161,7 +156,6 @@
 	}
      // include ('jsr/calendariofooter.php');
  ?>
-
 <!--  fin Calendario de tareas -->
 </body>
 </html>

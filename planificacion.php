@@ -22,155 +22,152 @@
 	                    $home="home_admin.php";
 	                    break;                                                             		
       }   
-		header("Location: ".$home);
-}
-elseif(!isset($_SESSION['nombre_usuario'])){
-	header("Location: index.php");
-}
-/*----------------------FIN VERIFICACION------------------------------------*/
-/*----------------------INICIO HABILITAR REGISTRO---------------------------*/
-$fecha = date("Y-m-d");
-$mensaje="Fecha sin definir";
-$inicio = $mensaje;
-$fin = $mensaje;
-$inicio_1=$mensaje;
-$fin_1=$mensaje;
-$inicio_3=$mensaje;
-$fin_3=$mensaje;
-$inicio_4=$mensaje;
-$fin_4=$mensaje;
-$inicio_5=$mensaje;
-$fin_5=$mensaje;
-$inicio_6=$mensaje;
-$fin_6=$mensaje;
-$inicio_7=$mensaje;
-$fin_7=$mensaje;
-if (isset($_POST['enviar'])) {//habilidar registro de grupo empresas
-	$error=false;
-	if (isset($_POST['inicio']) && isset($_POST['fin']) && isset($_POST['newsletter'])) {
-		$actividad_2="checked";
-		$inicio = $_POST['inicio'];
-		$fin = $_POST['fin'];
-		
-		$ini_dia = substr($inicio, 8);
-		$ini_mes = substr($inicio, 5,2);
-		$ini_year = substr($inicio, 0,4);
-
-		$fin_dia = substr($fin, 8);
-		$fin_mes = substr($fin, 5,2);
-		$fin_year = substr($fin, 0,4);
-		if(@checkdate($ini_mes, $ini_dia, $ini_year)){
-			if (@checkdate($fin_mes, $fin_dia, $fin_year)) {
-				if($inicio>=$fecha){//corecto
-					if ($fin>=$inicio) {//corecto sobreescribir base de datos
-						if (strtotime($fin)<=$fecha_fin) {
-							$consulta_sql="UPDATE fase_convocatoria
-									set fecha_inicio='$inicio' , fecha_fin='$fin', activo=1
-									WHERE gestion=$id_gestion AND tipo_fase_convocatoria=2";
-							$consulta = mysql_query($consulta_sql,$conn)
-							or die(mysql_error());
-							header('Location:planificacion.php#registro');
-						}
-						else{
-							$error = true;
-							$error_fecha_fin = "La gesti&oacute;n termina la fecha ".$fin_gestion;
-						}
-					}
-					else{
-						$error = true;
-						$error_fecha_fin = "La fecha de finalizaci&oacute;n no debe ser menor que la fecha de inicio";
-					}
-				}
-				else{
-					$error = true;
-					$error_fecha_ini = "La fecha de inicio no debe ser menor a la fecha presente";
-				}
-			}
-			else{
-				$error = true;
-				$error_fecha_fin = "La fecha de finalizacion no es v&aacute;lida";
-			}
-		}
-		else{
-			$error = true;
-			$error_fecha_ini = "La fecha de inicio no es v&aacute;lida";
-		}
+      header("Location: ".$home);
+	}elseif(!isset($_SESSION['nombre_usuario'])){
+		header("Location: index.php");
 	}
-	else{
-		if (!isset($_POST['newsletter'])) {
-			$consulta_sql="UPDATE fase_convocatoria
-						   set activo=0
-						   WHERE gestion=$id_gestion AND tipo_fase_convocatoria=2";
-			$consulta = mysql_query($consulta_sql,$conn)
-			or die("Could not execute the select query.");
-			header('Location:planificacion.php#registro');
-			
-		}
-	}
-}
+	/*----------------------FIN VERIFICACION------------------------------------*/
+	/*----------------------INICIO HABILITAR REGISTRO---------------------------*/
+	$fecha    = date("Y-m-d");
+	$mensaje  = "Fecha sin definir";
+	$inicio   = $mensaje;
+	$fin      = $mensaje;
+	$inicio_1 = $mensaje;
+	$fin_1    = $mensaje;
+	$inicio_3 = $mensaje;
+	$fin_3    = $mensaje;
+	$inicio_4 = $mensaje;
+	$fin_4    = $mensaje;
+	$inicio_5 = $mensaje;
+	$fin_5    = $mensaje;
+	$inicio_6 = $mensaje;
+	$fin_6    = $mensaje;
+	$inicio_7 = $mensaje;
+	$fin_7    = $mensaje;
+	
+	//lanzamiento convocatoria
+	
+	if (isset($_POST['enviar_1'])) {
+		$error_1 = false;
+		if (isset($_POST['inicio_1']) && isset($_POST['fin_1']) && isset($_POST['newsletter_1'])) {
+			$inicio_1 = $_POST['inicio_1'];
+			$fin_1 = $_POST['fin_1'];
+			$actividad_1="checked";
+			$ini_dia_1 = substr($inicio_1, 8);
+			$ini_mes_1 = substr($inicio_1, 5,2);
+			$ini_year_1 = substr($inicio_1, 0,4);
 
-if (isset($_POST['enviar_1'])) {//lanzamiento convocatoria
-	$error_1=false;
-	if (isset($_POST['inicio_1']) && isset($_POST['fin_1']) && isset($_POST['newsletter_1'])) {
-		$inicio_1 = $_POST['inicio_1'];
-		$fin_1 = $_POST['fin_1'];
-		$actividad_1="checked";
-		$ini_dia_1 = substr($inicio_1, 8);
-		$ini_mes_1 = substr($inicio_1, 5,2);
-		$ini_year_1 = substr($inicio_1, 0,4);
-
-		$fin_dia_1 = substr($fin_1, 8);
-		$fin_mes_1 = substr($fin_1, 5,2);
-		$fin_year_1 = substr($fin_1, 0,4);
-		if(@checkdate($ini_mes_1, $ini_dia_1, $ini_year_1)){
-			if (@checkdate($fin_mes_1, $fin_dia_1, $fin_year_1)) {
-				if($inicio_1>=$fecha){//corecto
-					if ($fin_1>=$inicio_1) {//corecto sobreescribir base de datos
-						if (strtotime($fin_1)<=$fecha_fin) {
-							$consulta_sql="UPDATE fase_convocatoria
-										set fecha_inicio='$inicio_1' , fecha_fin='$fin_1', activo=1
-										WHERE gestion=$id_gestion AND tipo_fase_convocatoria=1";
-							$consulta = mysql_query($consulta_sql,$conn)
-							or die("Could not execute the select query.");
-							header('Location:planificacion.php#lanzamiento');
+			$fin_dia_1 = substr($fin_1, 8);
+			$fin_mes_1 = substr($fin_1, 5,2);
+			$fin_year_1 = substr($fin_1, 0,4);
+			if(@checkdate($ini_mes_1, $ini_dia_1, $ini_year_1)){
+				if (@checkdate($fin_mes_1, $fin_dia_1, $fin_year_1)) {
+					if($inicio_1>=$fecha){//corecto
+						if ($fin_1>=$inicio_1) {//corecto sobreescribir base de datos
+							if (strtotime($fin_1)<=$fecha_fin) {
+								$consulta_sql="UPDATE fase_convocatoria
+											set fecha_inicio='$inicio_1' , fecha_fin='$fin_1', activo=1
+											WHERE gestion=$id_gestion AND tipo_fase_convocatoria=1";
+								$consulta = mysql_query($consulta_sql,$conn)
+								or die("Could not execute the select query.");
+								header('Location:planificacion.php#lanzamiento');
+							}
+							else{
+								$error_1 = true;
+								$error_fecha_fin_1 = "La gesti&oacute;n termina la fecha ".$fin_gestion;
+							}
 						}
 						else{
 							$error_1 = true;
-							$error_fecha_fin_1 = "La gesti&oacute;n termina la fecha ".$fin_gestion;
+							$error_fecha_fin_1 = "La fecha de finalizaci&oacute;n no debe ser menor que la fecha de inicio";
 						}
 					}
 					else{
 						$error_1 = true;
-						$error_fecha_fin_1 = "La fecha de finalizaci&oacute;n no debe ser menor que la fecha de inicio";
+						$error_fecha_ini_1 = "La fecha de inicio no debe ser menor a la fecha presente";
 					}
 				}
 				else{
 					$error_1 = true;
-					$error_fecha_ini_1 = "La fecha de inicio no debe ser menor a la fecha presente";
+					$error_fecha_fin_1 = "La fecha de finalizacion no es v&aacute;lida";
 				}
 			}
 			else{
 				$error_1 = true;
-				$error_fecha_fin_1 = "La fecha de finalizacion no es v&aacute;lida";
+				$error_fecha_ini_1 = "La fecha de inicio no es v&aacute;lida";
 			}
 		}
 		else{
-			$error_1 = true;
-			$error_fecha_ini_1 = "La fecha de inicio no es v&aacute;lida";
+			if (!isset($_POST['newsletter_1'])) {
+				$consulta_sql="UPDATE fase_convocatoria
+							   set activo=0
+							   WHERE gestion=$id_gestion AND tipo_fase_convocatoria=1";
+				$consulta = mysql_query($consulta_sql,$conn)
+				or die("Could not execute the select query.");
+				header('Location:planificacion.php#lanzamiento');
+				
+			}
 		}
 	}
-	else{
-		if (!isset($_POST['newsletter_1'])) {
-			$consulta_sql="UPDATE fase_convocatoria
-						   set activo=0
-						   WHERE gestion=$id_gestion AND tipo_fase_convocatoria=1";
-			$consulta = mysql_query($consulta_sql,$conn)
-			or die("Could not execute the select query.");
-			header('Location:planificacion.php#lanzamiento');
+
+if (isset($_POST['enviar_2'])) {//habilidar registro de grupo empresas
+		$error = false;
+		if (isset($_POST['inicio']) && isset($_POST['fin']) && isset($_POST['newsletter'])) {
+			$actividad_2 ="checked";
+			$inicio      = $_POST['inicio'];
+			$fin = $_POST['fin'];
 			
+			$ini_dia = substr($inicio, 8);
+			$ini_mes = substr($inicio, 5,2);
+			$ini_year = substr($inicio, 0,4);
+
+			$fin_dia = substr($fin, 8);
+			$fin_mes = substr($fin, 5,2);
+			$fin_year = substr($fin, 0,4);
+			if(@checkdate($ini_mes, $ini_dia, $ini_year)){
+				if (@checkdate($fin_mes, $fin_dia, $fin_year)) {
+					if($inicio>=$fecha){//corecto
+						if ($fin>=$inicio) {//corecto sobreescribir base de datos
+							if (strtotime($fin)<=$fecha_fin) {
+								$consulta_sql="UPDATE fase_convocatoria
+										set fecha_inicio='$inicio' , fecha_fin='$fin', activo=1
+										WHERE gestion=$id_gestion AND tipo_fase_convocatoria=2";
+								$consulta = mysql_query($consulta_sql,$conn)
+								or die(mysql_error());
+								header('Location:planificacion.php#registro');
+							}else{
+								$error = true;
+								$error_fecha_fin = "La gesti&oacute;n termina la fecha ".$fin_gestion;
+							}
+						}else{
+							$error = true;
+							$error_fecha_fin = "La fecha de finalizaci&oacute;n no debe ser menor que la fecha de inicio";
+						}
+					}else{
+						$error = true;
+						$error_fecha_ini = "La fecha de inicio no debe ser menor a la fecha presente";
+					}
+				}else{
+					$error = true;
+					$error_fecha_fin = "La fecha de finalizacion no es v&aacute;lida";
+				}
+			}else{
+				$error = true;
+				$error_fecha_ini = "La fecha de inicio no es v&aacute;lida";
+			}
+		}else{
+			if (!isset($_POST['newsletter'])) {
+				$consulta_sql="UPDATE fase_convocatoria
+							   set activo=0
+							   WHERE gestion=$id_gestion AND tipo_fase_convocatoria=2";
+				$consulta = mysql_query($consulta_sql,$conn)
+				or die("Could not execute the select query.");
+				header('Location:planificacion.php#registro');
+			}
 		}
 	}
-}
+
+
 if (isset($_POST['enviar_3'])) {//documentos
 	$error_3=false;
 	if (isset($_POST['inicio_3']) && isset($_POST['fin_3']) && isset($_POST['newsletter_3'])) {
@@ -579,7 +576,7 @@ include('header.php');
 					</div>
 					<div class="box-content">
 						<?php
-						if (!isset($_POST['enviar'])) {
+						if (!isset($_POST['enviar_2'])) {
 							$consulta_act_2 = "SELECT fecha_inicio,fecha_fin,descripcion,activo
 										FROM fase_convocatoria
 										WHERE gestion=$id_gestion and tipo_fase_convocatoria=2";
@@ -624,7 +621,7 @@ include('header.php');
 								</fieldset>	
 								<div class="control-group">
 									<div class="controls">
-						         <button name="enviar"type="submit" class="btn btn-primary" id="enviar"><i class="icon-ok"></i> Aceptar</button>
+						         <button name="enviar_2"type="submit" class="btn btn-primary" id="enviar_2"><i class="icon-ok"></i> Aceptar</button>
 								 <button type="reset" class="btn"><i class="icon-remove"></i> Cancelar</button>
 								 </div>
 								 </div>

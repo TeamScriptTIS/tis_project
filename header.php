@@ -2,29 +2,27 @@
 	if(!isset($titulo)){
 		header('Location: index.php');
 	}
-
 	if (isset($_SESSION['nombre_usuario'])){
 		$sesion_valida  = true;
 		$nombre_usuario = $_SESSION['nombre_usuario'];
 		$id_usuario     = $_SESSION['id'];
-
 		switch  ($_SESSION['tipo']){
-				case (5) :
-                	$tipo="Integrante Grupo Empresa";
-                    break;
-                case (4) :
-                	$tipo="Grupo Empresa";
-                    break;
-                case (3) :
-                	$tipo="Consultor TIS";
-                    break;
-                case (2) :
-                	$tipo="Jefe Consultor TIS";
-                    break;
-                case (1) :
-                    $tipo ="Administrador";
-                    break;
-          }
+			case (5) :
+            	$tipo = "Integrante Grupo Empresa";
+                break;
+            case (4) :
+            	$tipo = "Grupo Empresa";
+                break;
+            case (3) :
+            	$tipo = "Consultor TIS";
+                break;
+            case (2) :
+            	$tipo = "Jefe Consultor TIS";
+                break;
+            case (1) :
+                $tipo = "Administrador";
+                break;
+      	}
 	}else{
 		$sesion_valida = false;
 	}
