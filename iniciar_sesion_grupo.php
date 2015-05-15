@@ -2,7 +2,7 @@
 	$titulo = "Iniciar sesi&oacute;n Grupo Empresa - Integrante"; 
 	include('conexion/verificar_gestion.php');
 	session_start();
-	/*
+	
 	if(isset($_SESSION['nombre_usuario'])){
 		$home="";
 		switch  ($_SESSION['tipo']){
@@ -24,7 +24,7 @@
 	          }   
 		header("Location: ".$home);
 	}
-	*/
+	
 	$quien_ingresa = "Grupo Empresa - Integrante";
 	$pag_registro  = "registro_grupo.php";
 
