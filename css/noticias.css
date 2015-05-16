@@ -3,15 +3,12 @@
 /* Estilos para los avisos moviles del index */
 .caja_aviso{
    border-radius: 5px;
-  border:1px solid #DDDDDD;
-  
+   border:1px solid #DDDDDD;
    padding: 4px;
-    
 }
 
 .titulo_aviso{
    /*background-color: ; */
-
    font-weight: bold;
    margin-bottom: 1px;
    margin-left: 1px;
@@ -46,4 +43,3 @@
    padding: 4px 4px 0px 4px;
    color: #317EAC;
 }
-

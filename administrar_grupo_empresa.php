@@ -1,10 +1,11 @@
 <?php
-$titulo="Administrar Consultores TIS";
-include('conexion/verificar_gestion.php');
-session_start();
+  $titulo = "Administrar Grupo Empresas";
+  include('conexion/verificar_gestion.php');
+  session_start();
+
 /*------------------VERIFICAR QUE SEAL EL ADMINISTRADOR------------------------*/
-    if(isset($_SESSION['nombre_usuario']) && $_SESSION['tipo']!=1)
-    {/*SI EL QUE INGRESO A NUESTRA PAGINA ES CONSULTOR DE CUALQUIER TIPO*/
+    if(isset($_SESSION['nombre_usuario']) && $_SESSION['tipo']!=1){
+    /*SI EL QUE INGRESO A NUESTRA PAGINA ES CONSULTOR DE CUALQUIER TIPO*/
             $home="";
             switch  ($_SESSION['tipo']){
                     
@@ -22,13 +23,14 @@ session_start();
                         break;                                                                     
                   }   
             header("Location: ".$home);
-    }
-    elseif(!isset($_SESSION['nombre_usuario'])){
+    }elseif(!isset($_SESSION['nombre_usuario'])){
         header("Location: index.php");
     }
 /*----------------------FIN VERIFICACION------------------------------------*/
-include('header.php');
+    include('header.php');
  ?>
+
+
  			<!--PARTICIONAR
  			<li>
 						<a href="#">Inicio</a> <span class="divider">/</span>
@@ -54,12 +56,13 @@ include('header.php');
 					<div class="box-content">
             <?php 
                 include('conexion/conexion.php');
-                 $consulta = "SELECT u.nombre_usuario,u.habilitado,ge.nombre_corto,ge.nombre_largo,s.descripcion,u.id_usuario,u.clave
-FROM usuario u,integrante i,grupo_empresa ge,sociedad s
-WHERE  u.tipo_usuario = 4 and u.id_usuario=i.usuario and i.grupo_empresa=ge.id_grupo_empresa and ge.sociedad= s.id_sociedad ";
+                $consulta = "SELECT u.nombre_usuario,u.habilitado,ge.nombre_corto,ge.nombre_largo,s.descripcion,u.id_usuario,u.clave
+                              FROM usuario u,integrante i,grupo_empresa ge,sociedad s
+                              WHERE  u.tipo_usuario = 4 and u.id_usuario=i.usuario and i.grupo_empresa=ge.id_grupo_empresa and ge.sociedad= s.id_sociedad ";
                  $resultado = mysql_query($consulta);
-                $num_res=mysql_num_rows($resultado);
-                 if ($num_res>0) {
+                 $num_res   = mysql_num_rows($resultado);
+
+                 if ($num_res > 0) {
               ?>
             <form method="post" action="conexion/admin_grupo.php" accept-charset="utf-8">
 						<table class="table table-striped table-bordered  datatable">
@@ -76,7 +79,7 @@ WHERE  u.tipo_usuario = 4 and u.id_usuario=i.usuario and i.grupo_empresa=ge.id_g
 						  <tbody>
               <?php
 
-                               $identi=0;
+                               $identi = 0;
                                 while($row = mysql_fetch_array($resultado)) {
                                echo "
                                 <tr>
@@ -87,29 +90,25 @@ WHERE  u.tipo_usuario = 4 and u.id_usuario=i.usuario and i.grupo_empresa=ge.id_g
                                      <td >".$row["nombre_largo"]."</td>
                                      <td >".$row["descripcion"]."</td>
                                      ";
-
-
-                                        $aux= $row["habilitado"];
-                                        if($aux=="1"){
+                                        if($row["habilitado"]=="1"){
                                            echo "<td class=\"center\"><center> <input type=\"checkbox\" id=c".$identi." name=c".$identi." checked></center></td>";
-                                         }
-                                         else{
+                                         }else{
                                             echo "<td class=\"center\"><center> <input type=\"checkbox\" id=c".$identi." name=c".$identi."></center></td>";
-                                        }
+                                         }
                         		 echo "	</tr> ";
                                  $identi++;
                                 }
                              ?>
 						  </tbody>
 					  </table>
-                      <?php echo "<input type=\"hidden\" id=count name=count value=".$identi." ></input>"; ?>
+                      <?php 
+                        echo "<input type=\"hidden\" id=count name=count value=".$identi." ></input>"; ?>
                                <div class="control-group">
 								<div class="controls">
-						         <button name="enviar"type="submit" class="btn btn-primary" id="enviar"><i class="icon-ok"></i> Guardar cambios</button>
+						         <button name="enviar"type="submit" class="btn btn-primary" id="enviar"><i class="icon-ok"></i> Guardar cambios </button>
 								 <button type="reset" class="btn">Restablecer</button>
                                 </div>
 								 </div>
-
                     </form>
                    <?php }
                             else{
@@ -118,7 +117,6 @@ WHERE  u.tipo_usuario = 4 and u.id_usuario=i.usuario and i.grupo_empresa=ge.id_g
                                 Ninguna Grupo Empresa se ha registrado.</h4>
                                 </div>";
                             }
-
                   ?>
 					</div>
 				</div><!--/span-->

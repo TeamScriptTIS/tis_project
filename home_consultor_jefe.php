@@ -1,32 +1,31 @@
 <?php 
-$titulo="P&aacute;gina de inicio Jefe Consultor TIS";
-include("conexion/verificar_gestion.php");
-session_start();
-/*------------------VERIFICAR QUE SEAL EL JEFE CONSULTOR------------------------*/
-if(isset($_SESSION['nombre_usuario']) && $_SESSION['tipo']!=2)
-{/*SI EL QUE INGRESO A NUESTRA PAGINA ES CONSULTOR DE CUALQUIER TIPO*/
-		$home="";
+	$titulo = "P&aacute;gina de inicio Jefe Consultor TIS";
+	include("conexion/verificar_gestion.php");
+	session_start();
+	/*------------------VERIFICAR QUE SEAL EL JEFE CONSULTOR------------------------
+	if(isset($_SESSION['nombre_usuario']) && $_SESSION['tipo']!=2){
+		/*SI EL QUE INGRESO A NUESTRA PAGINA ES CONSULTOR DE CUALQUIER TIPO
+		$home = "";
 		switch  ($_SESSION['tipo']){
-				case (5) :
-	                	$home="home_integrante.php";
-	                    break;
-	            case (4) :
-	                	$home="home_grupo.php";
-	                    break;
-	            case (3) :
-	                	$home="home_consultor.php";
-	                    break;	            
-	            case (1) :
-	                    $home="home_admin.php";
-	                    break;                                                             		
-	          }   
+			case (5) :
+		        	$home="home_integrante.php";
+		            break;
+		    case (4) :
+		        	$home="home_grupo.php";
+		            break;
+		    case (3) :
+		        	$home="home_consultor.php";
+		            break;	            
+		    case (1) :
+		            $home="home_admin.php";
+		            break;                                                             		
+      	}   
 		header("Location: ".$home);
-}
-elseif(!isset($_SESSION['nombre_usuario'])){
-	header("Location: index.php");
-}
-/*----------------------FIN VERIFICACION------------------------------------*/
-include('header.php');
+	}elseif(!isset($_SESSION['nombre_usuario'])){
+		header("Location: index.php");
+	}
+	/*----------------------FIN VERIFICACION------------------------------------*/
+	include('header.php');
  ?>
 			<div>
 				<ul class="breadcrumb">
@@ -61,25 +60,20 @@ include('header.php');
 					</div>	
 				</div><!--/span-->  
 			</div><!-- fin row -->
-			<?php } 
-			else{ ?>
+			<?php }else{ ?>
 			<div class="row-fluid">
 			<div class="box span12">
 					<div class="box-header well">
 						<h2><i class="icon-info-sign"></i> Informaci&oacute;n</h2>
 					</div>
 					<div class="box-content alerts">
-									
-							Bienvenido Jefe Consultor TIS a la <b>Gesti&oacute;n <?php echo $nombre_gestion; ?></b>, en este sitio usted podr&aacute; realizar la publicaci&oacute;n de avisos
-							 y documentos, realizar el seguimiento de las Grupo Empresas que se inscribieron con usted, enviar mensajes a cualquier usuario
-							 del sistema y tambi&eacute;n podr&aacute; participar del espacio de discuci&oacute;n donde las grupo empresas
-							 inscritas con usted dejaran preguntas o dudas esperando su respuesta.
-							<br>						
+					 Bienvenido Jefe Consultor TIS a la <b>Gesti&oacute;n <?php echo $nombre_gestion; ?></b>, en este sitio usted podr&aacute; realizar la publicaci&oacute;n de avisos
+					 y documentos, realizar el seguimiento de las Grupo Empresas que se inscribieron con usted, enviar mensajes a cualquier usuario
+					 del sistema y tambi&eacute;n podr&aacute; participar del espacio de discuci&oacute;n donde las grupo empresas
+					 inscritas con usted dejaran preguntas o dudas esperando su respuesta.
+						<br>						
 					</div>	
 				</div><!--/span-->  
 			</div><!-- fin row -->
 			<?php } ?>
-				
-			
-			
 <?php include('footer.php'); ?>

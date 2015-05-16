@@ -6,8 +6,7 @@
 		header("Location:../index.php");
 	}
 
-	//destruir sesion  y reistrarlo en la bitacora
-
+	//destruir sesion  y registrarlo en la bitacora
 	session_start();
 
 	include("conexion.php");

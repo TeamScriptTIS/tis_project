@@ -1,78 +1,72 @@
 <?php
-$titulo="Iniciar sesi&oacute;n Grupo Empresa - Integrante"; 
-include('conexion/verificar_gestion.php');
-session_start();
-if(isset($_SESSION['nombre_usuario']))
-{
-	$home="";
-	switch  ($_SESSION['tipo']){
-				case (5) :
-	                	$home="home_integrante.php";
-	                    break;
-            	case (4) :
-                	$home="home_grupo.php";
-                    break;
-            	case (3) :
-                	$home="home_consultor.php";
-                    break;
-                case (2) :
-                	$home="home_consultor_jefe.php";
-                    break;
-                case (1) :
-                    $home="home_admin.php";
-                    break;                                                             		
-          }   
-	header("Location: ".$home);
-}
-$quien_ingresa="Grupo Empresa - Integrante";
-$pag_registro="registro_grupo.php";
-
-if($gestion_valida){
-	$error=false;
-	if (isset($_POST['aceptar'])) {
-		$usuario = trim($_POST['username']);
-		$clave = trim($_POST['password']);
-		$consulta_sql="SELECT id_usuario, nombre_usuario, tipo_usuario
-						FROM usuario
-						WHERE nombre_usuario COLLATE utf8_bin='$usuario' and clave COLLATE utf8_bin ='$clave' AND gestion=$id_gestion AND (tipo_usuario=4 || tipo_usuario=5) AND habilitado=1";
-					$consulta = mysql_query($consulta_sql,$conn)
-					or die("Could not execute the select query.");
-					$resultado = mysql_fetch_assoc($consulta);
+	$titulo = "Iniciar sesi&oacute;n Grupo Empresa - Integrante"; 
+	include('conexion/verificar_gestion.php');
+	session_start();
 	
-					if(is_array($resultado) && !empty($resultado))
-					{	
-						$_SESSION['id'] = $resultado['id_usuario'];
-						$_SESSION['tipo']= $resultado['tipo_usuario'];
-						$_SESSION['nombre_usuario'] = $resultado['nombre_usuario'];			
-					}
-				else{	
+	/*
+	if(isset($_SESSION['nombre_usuario'])){
+		$home="";
+		switch  ($_SESSION['tipo']){
+					case (5) :
+		                	$home="home_integrante.php";
+		                    break;
+	            	case (4) :
+	                	$home="home_grupo.php";
+	                    break;
+	            	case (3) :
+	                	$home="home_consultor.php";
+	                    break;
+	                case (2) :
+	                	$home="home_consultor_jefe.php";
+	                    break;
+	                case (1) :
+	                    $home="home_admin.php";
+	                    break;                                                             		
+	          }   
+		header("Location: ".$home);}
+	*/
 
-						$error=true;
-						$error_sesion="Los datos son incorrectos o usted no esta habilitado";
-					}
-					if(!$error){
-						if(isset($_SESSION['nombre_usuario']) && isset($_SESSION['tipo']))
-						{
-							$bitacora = mysql_query("INSERT into bitacora_sesion(usuario,fecha_hora,operacion)
-													VALUES (".$_SESSION['id'].",CURRENT_TIMESTAMP,0)",$conn)
-							or die("Error en la bitacora.");
-							$home="";
-							switch  ($_SESSION['tipo']){
-										case (5) :
-							                	$home="home_integrante.php";
-							                    break;
-						            	case (4) :
-						                	$home="home_grupo.php";
-						                    break;                                           		
-						          }   
-							header("Location: ".$home);
-						}
-						mysql_free_result($consulta);
-					}
+	$quien_ingresa = "Grupo Empresa - Integrante";
+	$pag_registro  = "registro_grupo.php";
+
+	if($gestion_valida){
+		$error = false;
+		if (isset($_POST['aceptar'])) {
+			$usuario      = trim($_POST['username']);
+			$clave        = trim($_POST['password']);
+			$consulta_sql = "SELECT id_usuario, nombre_usuario, tipo_usuario
+							 FROM usuario
+							 WHERE nombre_usuario COLLATE utf8_bin='$usuario' and clave COLLATE utf8_bin ='$clave' AND gestion=$id_gestion AND (tipo_usuario=4 || tipo_usuario=5) AND habilitado=1";
+			$consulta = mysql_query($consulta_sql,$conn)or die("Could not execute the select query.");
+			$resultado = mysql_fetch_assoc($consulta);
+			if(is_array($resultado) && !empty($resultado)){	
+				$_SESSION['id']             = $resultado['id_usuario'];
+				$_SESSION['tipo']           = $resultado['tipo_usuario'];
+				$_SESSION['nombre_usuario'] = $resultado['nombre_usuario'];			
+			}else{	
+				$error        = true;
+				$error_sesion ="Los datos son incorrectos o usted no esta habilitado";
+			}
+			if(!$error){	
+				if(isset($_SESSION['nombre_usuario']) && isset($_SESSION['tipo'])){
+					$bitacora = mysql_query("INSERT into bitacora_sesion(usuario,fecha_hora,operacion)
+											VALUES (".$_SESSION['id'].",CURRENT_TIMESTAMP,0)",$conn) or die("Error en la bitacora.");
+					$home="";
+					switch  ($_SESSION['tipo']){
+								case (5) :
+				                	$home = "home_integrante.php";
+				                    break;
+				            	case (4) :
+				                	$home = "home_grupo.php";
+				                    break;                                           		
+		          	}   
+					header("Location: ".$home);
+				}
+				mysql_free_result($consulta);
+			}
+		}
 	}
-
-}
-include('header.php');
+	include('header.php');
  ?>
 			<div>
 				<ul class="breadcrumb">					

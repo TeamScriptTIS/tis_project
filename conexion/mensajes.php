@@ -70,7 +70,5 @@ session_start();
                                   $numero++;
                                }
                            echo "</table>";
-               
-               
         }
 ?>

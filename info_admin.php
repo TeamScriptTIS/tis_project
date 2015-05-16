@@ -1,13 +1,13 @@
 <?php
-session_start();
-$quien_ingresa="Administrador del sistema";
-$pag_ini="home_admin.php";
-$titulo="Informacion del usuario".$quien_ingresa; 
-include("conexion/verificar_gestion.php");
-/*------------------VERIFICAR QUE SEAL EL CONSULTOR------------------------*/
-if(isset($_SESSION['nombre_usuario']) && $_SESSION['tipo']!=1)
-{/*SI EL QUE INGRESO A NUESTRA PAGINA ES CONSULTOR DE CUALQUIER TIPO*/
-		$home="";
+	session_start();
+	$quien_ingresa = "Administrador del sistema";
+	$pag_ini       = "home_admin.php";
+	$titulo        = "Informacion del usuario".$quien_ingresa; 
+	include("conexion/verificar_gestion.php");
+	/*------------------VERIFICAR QUE SEAL EL CONSULTOR------------------------
+	if(isset($_SESSION['nombre_usuario']) && $_SESSION['tipo']!=1){
+		/*SI EL QUE INGRESO A NUESTRA PAGINA ES CONSULTOR DE CUALQUIER TIPO
+		$home = "";
 		switch  ($_SESSION['tipo']){
 				case (5) :
 	                	$home="home_integrante.php";
@@ -23,34 +23,31 @@ if(isset($_SESSION['nombre_usuario']) && $_SESSION['tipo']!=1)
 	                    break;                                                             		
 	          }   
 		header("Location: ".$home);
-}
-elseif(!isset($_SESSION['nombre_usuario'])){
-	header("Location: index.php");
-}
-/*----------------------FIN VERIFICACION------------------------------------*/
-
-include('header.php');
+	}elseif(!isset($_SESSION['nombre_usuario'])){
+		header("Location: index.php");
+	}
+	----------------------FIN VERIFICACION------------------------------------*/
+	include('header.php'); 
  ?>
+
 <script type="text/javascript">
+	//Aqui se imprime las 
 	function imprimir(){
-  var objeto=document.getElementById('print');  //obtenemos el objeto a imprimir
-  var ventana=window.open('','_blank');  //abrimos una ventana vacía nueva
-  ventana.document.write(objeto.innerHTML);  //imprimimos el HTML del objeto en la nueva ventana
-  ventana.document.close();  //cerramos el documento
+  		var objeto  = document.getElementById('print');  //obtenemos el objeto a imprimir
+  		var ventana = window.open('','_blank');  //abrimos una ventana vacía nueva
+  		ventana.document.write(objeto.innerHTML);  //imprimimos el HTML del objeto en la nueva ventana
+    	ventana.document.close();  //cerramos el documento
 
-  	var css = ventana.document.createElement("link");
-	css.setAttribute("href", "css/style.css");
-	css.setAttribute("rel", "stylesheet");
-	css.setAttribute("type", "text/css");
-	ventana.document.head.appendChild(css);
+  		var css = ventana.document.createElement("link");
+		css.setAttribute("href", "css/style.css");
+		css.setAttribute("rel", "stylesheet");
+		css.setAttribute("type", "text/css");
+		ventana.document.head.appendChild(css);
 
-
-  ventana.print();  //imprimimos la ventana
-  ventana.close();  //cerramos la ventana
-}
-
+    	ventana.print();  //imprimimos la ventana
+    	ventana.close();  //cerramos la ventana
+	}
 </script>
-
 
 			<div>
 				<ul class="breadcrumb">					
@@ -76,23 +73,20 @@ include('header.php');
 	                          					or die("Could not execute the select query.");
 
 								$resultado = mysql_fetch_assoc($consulta_usuario);
-								if(is_array($resultado) && !empty($resultado))
-								{	
-										$nombre= $resultado['nombre'];
-										$apellido= $resultado['apellido'];
-										$telefono= $resultado['telefono'];
-										$email= $resultado['email'];
-										
-										
-										if($resultado['habilitado']=1){
-										$habilitado= "Si";	}
-										else{
-											$habilitado="No";
-										}		
-								}
-								else{
+								if(is_array($resultado) && !empty($resultado)){	
+									$nombre   = $resultado['nombre'];
+									$apellido = $resultado['apellido'];
+									$telefono = $resultado['telefono'];
+									$email    = $resultado['email'];
+									if($resultado['habilitado']=1){
+										$habilitado = "Si";	
+									}else{
+										$habilitado = "No";
+									}		
+								}else{
 									echo "<h4>No se Encontro ning&uacute;n registro";
 								} ?>
+
 								<table class="table table-bordered">
 									<thead>
 										<tr>
@@ -107,7 +101,7 @@ include('header.php');
 									</tr>
 									<tr>
 										<td>Nombre: </td>
-										<td class="center"><?php echo $nombre; ?></td>                                       
+									<td class="center"><?php echo $nombre; ?></td>                                       
 									</tr>
 									<tr>
 										<td>Apellido: </td>
