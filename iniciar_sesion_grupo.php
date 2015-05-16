@@ -3,6 +3,7 @@
 	include('conexion/verificar_gestion.php');
 	session_start();
 	
+	/*
 	if(isset($_SESSION['nombre_usuario'])){
 		$home="";
 		switch  ($_SESSION['tipo']){
@@ -22,9 +23,9 @@
 	                    $home="home_admin.php";
 	                    break;                                                             		
 	          }   
-		header("Location: ".$home);
-	}
-	
+		header("Location: ".$home);}
+	*/
+
 	$quien_ingresa = "Grupo Empresa - Integrante";
 	$pag_registro  = "registro_grupo.php";
 
@@ -53,8 +54,8 @@
 					$home="";
 					switch  ($_SESSION['tipo']){
 								case (5) :
-					                	$home = "home_integrante.php";
-					                    break;
+				                	$home = "home_integrante.php";
+				                    break;
 				            	case (4) :
 				                	$home = "home_grupo.php";
 				                    break;                                           		

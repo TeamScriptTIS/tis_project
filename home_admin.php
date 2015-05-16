@@ -2,9 +2,9 @@
 	$titulo = "Administrador del Sistema";
  	include('conexion/verificar_gestion.php');
 	session_start();
-/*------------------VERIFICAR QUE SEAL EL ADMINISTRADOR------------------------*/
+/*------------------VERIFICAR QUE SEAL EL ADMINISTRADOR------------------------
 	if(isset($_SESSION['nombre_usuario']) && $_SESSION['tipo'] != 1){
-		/*SI EL QUE INGRESO A NUESTRA PAGINA ES CONSULTOR DE CUALQUIER TIPO*/
+		/*SI EL QUE INGRESO A NUESTRA PAGINA ES CONSULTOR DE CUALQUIER TIPO
 		$home = "";
 		switch  ($_SESSION['tipo']){
 				case (5) :
@@ -41,6 +41,7 @@
 		}
 
 		$fin = $fin_max;
+
 		if (isset($_POST['enviar'])) {
 			$error       = false;
 			$inicio      = $_POST['inicio'];
@@ -86,9 +87,7 @@
 			}
 		}
 	}
-
-include('header.php');
-
+	include('header.php');
  ?>
  			<!--PARTICIONAR
  			<li>
@@ -106,9 +105,10 @@ include('header.php');
 				</ul>
 			</div>
 			<center><h3>Bienvenido Administrador</h3></center>
-			<?php 
-			if (!$gestion_valida) { ?>
+			<?php
 
+			if (!$gestion_valida) { ?>
+			
 			<div class="row-fluid">
 			<div class="box span12">
 					<div class="box-header well">

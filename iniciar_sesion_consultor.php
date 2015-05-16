@@ -25,7 +25,6 @@
 			header("Location: ".$home);
 	}
 	*/
-
 	$quien_ingresa = "Consultor TIS";
 	$pag_registro  = "registro_consultor.php";
 	$error         = false;
@@ -33,6 +32,7 @@
 	include('conexion/conexion.php');
 
 	if (isset($_POST['aceptar'])) {	
+
 		$usuario = trim($_POST['username']);
 		$clave   = trim($_POST['password']);
 		$consulta_sql = "SELECT id_usuario, nombre_usuario, tipo_usuario
@@ -78,7 +78,7 @@
 						<a href="index.php">Inicio</a><span class="divider">/</span>
 					</li>
 					<li>
-<!-- ERROR DESCUBIERTO, NO ESTABA BIEN REDIRIGIDA LA PAGINA-->
+						<!-- ERROR DESCUBIERTO, NO ESTABA BIEN REDIRIGIDA LA PAGINA-->
 						<a href="iniciar_sesion_consultor.php">Iniciar sesi&oacute;n <?php echo $quien_ingresa; ?></a>
 					</li>
 				</ul>

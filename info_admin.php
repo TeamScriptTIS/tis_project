@@ -4,10 +4,9 @@
 	$pag_ini       = "home_admin.php";
 	$titulo        = "Informacion del usuario".$quien_ingresa; 
 	include("conexion/verificar_gestion.php");
-
-	/*------------------VERIFICAR QUE SEAL EL CONSULTOR------------------------*/
+	/*------------------VERIFICAR QUE SEAL EL CONSULTOR------------------------
 	if(isset($_SESSION['nombre_usuario']) && $_SESSION['tipo']!=1){
-		/*SI EL QUE INGRESO A NUESTRA PAGINA ES CONSULTOR DE CUALQUIER TIPO*/
+		/*SI EL QUE INGRESO A NUESTRA PAGINA ES CONSULTOR DE CUALQUIER TIPO
 		$home = "";
 		switch  ($_SESSION['tipo']){
 				case (5) :
@@ -27,9 +26,7 @@
 	}elseif(!isset($_SESSION['nombre_usuario'])){
 		header("Location: index.php");
 	}
-
-	/*----------------------FIN VERIFICACION------------------------------------*/
-
+	----------------------FIN VERIFICACION------------------------------------*/
 	include('header.php'); 
  ?>
 
@@ -137,5 +134,4 @@
 		                </div>
 				</div>
 			</div>
-			
 <?php include('footer.php'); ?>
