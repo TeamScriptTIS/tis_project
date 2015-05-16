@@ -16,7 +16,7 @@
 
 		<footer>
 			<p class="pull-left">&copy; <a href="#" target="_blank">Derechos Reservados </a> <?php echo date('Y') ?></p>
-			<p class="pull-right">Powered by: <a href="mailto:unisoft.srl.2014@gmail.com">Unisoft S.R.L</a></p>
+			<p class="pull-right">Powered by: <a href="mailto:teamscript.comp@gmail.com">TeamScript S.R.L</a></p>
 		</footer>
 		<?php } ?>
 
