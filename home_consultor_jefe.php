@@ -25,6 +25,9 @@
 		header("Location: index.php");
 	}
 	/*----------------------FIN VERIFICACION------------------------------------*/
+	if(!isset($_SESSION['nombre_usuario']) || (isset($_SESSION['nombre_usuario']) && $_SESSION['tipo']!=2) ){
+		header("Location: index.php");
+	}
 	include('header.php');
  ?>
 			<div>

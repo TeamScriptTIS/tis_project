@@ -3,11 +3,6 @@
 	include('conexion/verificar_gestion.php');
 	session_start();
 	include('header.php');
-<<<<<<< HEAD
-	//estte es mi codigo mi sergio
-	//SU HEMBRA DEL ADRIAN
-=======
->>>>>>> origin/branchSergio
 ?>
 	<div>
 		<ul class="breadcrumb">

@@ -1,7 +1,10 @@
 <?php
 	$titulo = "Administrador del Sistema";
  	include('conexion/verificar_gestion.php');
+ 	session_cache_limiter('nocache, private');
+ 	session_name('session_admin');
 	session_start();
+
 /*------------------VERIFICAR QUE SEAL EL ADMINISTRADOR------------------------
 	if(isset($_SESSION['nombre_usuario']) && $_SESSION['tipo'] != 1){
 		/*SI EL QUE INGRESO A NUESTRA PAGINA ES CONSULTOR DE CUALQUIER TIPO
@@ -23,8 +26,12 @@
 		header("Location: ".$home);
 	}elseif(!isset($_SESSION['nombre_usuario'])){
 		header("Location: index.php");
-	}	
+	}
 /*----------------------FIN VERIFICACION------------------------------------*/
+
+	if(!isset($_SESSION['nombre_usuario'])){
+		header("Location: index.php");	
+	}
 
 	if (!$gestion_valida) {
 		$fecha       = date("Y-m-d");
@@ -47,7 +54,7 @@
 			$inicio      = $_POST['inicio'];
 			$descripcion = $_POST['descripcionG'];
 			$gestion     = $_POST['gestion'];
-			$fin         = $_POST['fin'];
+			$fin= $_POST['fin'];
 
 			$ini_dia     = substr($inicio, 8);
 			$ini_mes     = substr($inicio, 5,2);

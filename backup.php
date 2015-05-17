@@ -27,8 +27,8 @@ session_start();
         header("Location: index.php");
     }
 /*----------------------FIN VERIFICACION------------------------------------*/
-$directorio='../public_html';//LINUX
-//$directorio='backups';//WINDOWS
+//$directorio='../public_html';//LINUX
+$directorio='backups';//WINDOWS
 $mensaje=NULL;
 if(isset($_GET['backup']) && isset($_GET['file'])){
 	$file=$directorio."/".$_GET['file'];
@@ -80,6 +80,7 @@ if(isset($_POST['nuevo'])){
 	    $DirBase=$DirBase."bin\mysqldump";
 
 	}
+    //$executa="$DirBase -h webtisdb.cs.umss.edu.bo -u munisoft -pWSVBtmXg tis_munisoft > ".$name_file;
     $executa="$DirBase -h webtisdb.cs.umss.edu.bo -u munisoft -pWSVBtmXg tis_munisoft > ".$name_file;
     system($executa,$resultado);
 	if ($resultado)  //si hay error

@@ -2,9 +2,9 @@
 	$titulo = "P&aacute;gina de inicio Consultor TIS";
 	include("conexion/verificar_gestion.php");
 	session_start();
-/*------------------VERIFICAR QUE SEAL EL CONSULTOR------------------------*/
+/*------------------VERIFICAR QUE SEAL EL CONSULTOR------------------------
 	if(isset($_SESSION['nombre_usuario']) && $_SESSION['tipo']!=3){
-/*SI EL QUE INGRESO A NUESTRA PAGINA ES CONSULTOR DE CUALQUIER TIPO*/
+/*SI EL QUE INGRESO A NUESTRA PAGINA ES CONSULTOR DE CUALQUIER TIPO
 		$home = "";
 		switch  ($_SESSION['tipo']){
 				case (5) :
@@ -24,8 +24,11 @@
 	}elseif(!isset($_SESSION['nombre_usuario'])){
 		header("Location: index.php");
 	}
-
 /*----------------------FIN VERIFICACION------------------------------------*/
+	if(!isset($_SESSION['nombre_usuario'])){
+		header("Location: index.php");	
+	}
+
 	include('header.php');
 ?>
 
