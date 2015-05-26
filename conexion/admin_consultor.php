@@ -26,8 +26,8 @@
       $c = 1;
     }
     $sql = "UPDATE usuario 
-            SET  tipo_usuario = '$b',habilitado='$c' 
-            WHERE id_usuario = '$a'";
+            SET  tipo_usuario= '$b',habilitado='$c' 
+            WHERE id_usuario= '$a'";
     $result = mysql_query($sql);
     $counta++;
   }

@@ -1,26 +1,29 @@
-	<?php
-		if(!isset($titulo)){
-			header('Location: index.php');
-		}
-		 if(!isset($no_visible_elements) || !$no_visible_elements)	{ ?>
-				<!-- content ends  final del conenido-->
-				</div>
-				<?php 
-					include('nav-derecha.php');
-				?>	
-		<?php } ?>
+<?php
+	if(!isset($titulo)){
+		header('Location: index.php');
+	}
+	if(!isset($no_visible_elements) || !$no_visible_elements) {
+?>
+		<!-- content ends  final del conenido-->
+		</div>
+<?php 
+			include('nav-derecha.php');
+?>	
+<?php } ?>
 		</div><!--/fluid-row-->
-		<?php if(!isset($no_visible_elements) || !$no_visible_elements)	{ ?>
-		
+<?php
+	if(!isset($no_visible_elements) || !$no_visible_elements) {
+?>
 		<hr>
-
 		<footer>
 			<p class="pull-left">&copy; <a href="#" target="_blank">Derechos Reservados </a> <?php echo date('Y') ?></p>
 			<p class="pull-right">Powered by: <a href="mailto:teamscript.comp@gmail.com">TeamScript S.R.L</a></p>
 		</footer>
-		<?php } ?>
+<?php
+	} 
+?>
 
-	</div><!--/.fluid-container-->
+</div><!--/.fluid-container-->
 
 	<!-- external javascript
 	================================================== -->
@@ -336,8 +339,12 @@ $(document).ready(function() {
 	<script src="js/jquery.uploadify.min.js" type="text/javascript"></script>
 	<!-- select or dropdown enhancer -->
 	<script src="js/jquery.chosen.min.js"></script>
+
 	<!-- checkbox, radio, and file input styler -->
-	<script src="js/jquery.uniform.min.js"></script>
+	<!--ESTO SE MODIFICOO PARA K FUNCIONE EL RADIO-->
+	<!--script src="js/jquery.uniform.min.js"></script-->
+
+
 	<!-- plugin for gallery image view -->
 	<script src="js/jquery.colorbox.min.js"></script>
 	<!-- rich text editor library -->
@@ -423,14 +430,13 @@ $(document).ready(function() {
 
 
 
-
- <?php
- if(strcmp($titulo,"Planificar Tareas Grupo Empresa")==0){
- 	include ('jsr/calendarfooter.php');
+<?php
+	if(strcmp($titulo,"Planificar Tareas Grupo Empresa")==0) {
+		include ('jsr/calendarfooter.php');
 	}
-     // include ('jsr/calendariofooter.php');
- ?>
+	// include ('jsr/calendariofooter.php');
+?>
 
 <!--  fin Calendario de tareas -->
-</body>
+	</body>
 </html>

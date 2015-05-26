@@ -24,7 +24,7 @@
   elseif(!isset($_SESSION['nombre_usuario'])) {
     header("Location: index.php");
   }
-/*----------------------FIN VERIFICACION------------------------------------*/
+  /*----------------------FIN VERIFICACION------------------------------------*/
   include('header.php');
 ?>
  			<!--PARTICIONAR
@@ -85,12 +85,14 @@
                         } else {
                           echo " <td class=\"center\"> <a href=".$row["curriculum"]."> <i class=\"icon-download-alt\"></i> Descargar</a></td>";
                         }
+
                         $aux= $row["tipo_usuario"];
                         if($aux=="2") {
-                          echo "<td ><center> <input type=\"radio\" id=b".$identi." name=b".$identi." checked></center></td>";
+                          echo "<td class=\"center\"><center> <input type=\"radio\" id=b".$identi." name=\"b\" checked></center></td>";
                         } else{
-                          echo "<td class=\"center\"><center> <input type=\"radio\" id=b".$identi." name=b".$identi."></center></td>";
+                          echo "<td class=\"center\"><center> <input type=\"radio\" id=b".$identi." name=\"b\"></center></td>";
                         }
+
                         $aux= $row["habilitado"];
                         if($aux=="1") {
                           echo "<td class=\"center\"><center> <input type=\"checkbox\" id=c".$identi." name=c".$identi." checked></center></td>";
