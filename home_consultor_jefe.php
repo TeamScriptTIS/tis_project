@@ -2,9 +2,8 @@
 	$titulo = "P&aacute;gina de inicio Jefe Consultor TIS";
 	include("conexion/verificar_gestion.php");
 	session_start();
-	/*------------------VERIFICAR QUE SEAL EL JEFE CONSULTOR------------------------
+	
 	if(isset($_SESSION['nombre_usuario']) && $_SESSION['tipo']!=2){
-		/*SI EL QUE INGRESO A NUESTRA PAGINA ES CONSULTOR DE CUALQUIER TIPO
 		$home = "";
 		switch  ($_SESSION['tipo']){
 			case (5) :
@@ -24,10 +23,14 @@
 	}elseif(!isset($_SESSION['nombre_usuario'])){
 		header("Location: index.php");
 	}
+<<<<<<< HEAD
 	/*----------------------FIN VERIFICACION------------------------------------*/
 	if(!isset($_SESSION['nombre_usuario']) || (isset($_SESSION['nombre_usuario']) && $_SESSION['tipo']!=2) ){
 		header("Location: index.php");
 	}
+=======
+
+>>>>>>> origin/branchSergio
 	include('header.php');
  ?>
 			<div>
