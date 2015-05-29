@@ -19,9 +19,13 @@
     $b = 3;
     $c = 0;
 
-    if($_POST["b".$counta]) {
+    /*if($_POST["b".$counta]) {
       $b = 2;
+    }*/
+    if (isset($_POST['jefeconsultor'])) {
+      $b= 2;
     }
+
     if($_POST["c".$counta]) {
       $c = 1;
     }

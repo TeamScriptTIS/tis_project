@@ -88,9 +88,9 @@
 
                         $aux= $row["tipo_usuario"];
                         if($aux=="2") {
-                          echo "<td class=\"center\"><center> <input type=\"radio\" id=b".$identi." name=\"b\" checked></center></td>";
+                          echo "<td class=\"center\"><center> <input type=\"radio\" id=b".$identi." name=\"jefeconsultor\" value=b".$identi." checked></center></td>";
                         } else{
-                          echo "<td class=\"center\"><center> <input type=\"radio\" id=b".$identi." name=\"b\"></center></td>";
+                          echo "<td class=\"center\"><center> <input type=\"radio\" id=b".$identi." name=\"jefeconsultor\" value=b".$identi."></center></td>";
                         }
 
                         $aux= $row["habilitado"];
