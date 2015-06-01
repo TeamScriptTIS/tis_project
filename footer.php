@@ -343,6 +343,7 @@ $(document).ready(function() {
 	<!-- checkbox, radio, and file input styler -->
 	<!--ESTO SE MODIFICOO PARA K FUNCIONE EL RADIO-->
 	<!--script src="js/jquery.uniform.min.js"></script-->
+	<!--esto es lo q borro el ranga del adriano-->
 
 
 	<!-- plugin for gallery image view -->

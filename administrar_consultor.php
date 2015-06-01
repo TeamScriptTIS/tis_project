@@ -88,10 +88,17 @@
 
                         $aux= $row["tipo_usuario"];
                         if($aux=="2") {
+                          //poner el tipo esta linea de la ranga del adriano
+                          /*ACA SE HIZO ALGUNAS MODIFICACIONES*/
                           echo "<td class=\"center\"><center> <input type=\"radio\" id=b".$identi." name=\"jefeconsultor\" value=b".$identi." checked></center></td>";
                         } else{
                           echo "<td class=\"center\"><center> <input type=\"radio\" id=b".$identi." name=\"jefeconsultor\" value=b".$identi."></center></td>";
                         }
+                        /*{
+                          echo "<td class=\"center\"><center> <input type=\"radio\" id=b".$identi." name=\"jefeconsultor\" value=b".$identi." checked></center></td>";
+                        } else{
+                          echo "<td class=\"center\"><center> <input type=\"radio\" id=b".$identi." name=\"jefeconsultor\" value=b".$identi."></center></td>";
+                        }*/
 
                         $aux= $row["habilitado"];
                         if($aux=="1") {

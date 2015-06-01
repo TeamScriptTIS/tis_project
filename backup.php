@@ -27,17 +27,18 @@ session_start();
         header("Location: index.php");
     }
 /*----------------------FIN VERIFICACION------------------------------------*/
-$directorio='../public_html';//LINUX
-//$directorio='backups';//WINDOWS
+//$directorio='../public_html';//LINUX
+$directorio='backups';//WINDOWS
 $mensaje=NULL;
-if(isset($_GET['backup']) && isset($_GET['file'])){
+if(isset($_GET['backup']) && isset($_GET['file'])) {
 	$file=$directorio."/".$_GET['file'];
 	$tipo_backup="";
 	if($_GET['backup']==1 && file_exists($file)){
 		$tipo_backup="<strong>Restauraci&oacute;n de la Base de Datos correcta:</strong> EL archivo <b>".$_GET['file']." </b>correspondiente a la fecha <b>".(strftime("%d/%m/%y %X",filemtime($file)))." </b>fue restaurado exitosamente.";
-	}elseif($_GET['backup']==2){
+	}
+	elseif($_GET['backup']==2){
 		$tipo_backup="<strong>Nuevo archivo de respaldo creado:</strong> Se ha creado el archivo <b>".$_GET['file']." </b>en fecha <b>".(strftime("%d/%m/%y %X",filemtime($file)))." </b> exitosamente.";
-    }else{
+    } else {
 		header("Location: index.php");
 	}
 	$mensaje="<br/><div class=\"row-fluid\">
@@ -63,6 +64,7 @@ if(isset($_GET['error'])){
 			<strong>Error: </strong>".$tipo_error."
 		  </div></div>";
 }
+
 if(isset($_POST['nuevo'])){
 	$fechaDeLaCopia = date("dmY-His");
 	$name_file="mysql-tis-".$fechaDeLaCopia.".sql";
@@ -80,7 +82,8 @@ if(isset($_POST['nuevo'])){
 	    $DirBase=$DirBase."bin\mysqldump";
 
 	}
-    $executa="$DirBase -h webtisdb.cs.umss.edu.bo -u munisoft -pWSVBtmXg tis_munisoft > ".$name_file;
+    //$executa="$DirBase -h webtisdb.cs.umss.edu.bo -u munisoft -pWSVBtmXg tis_munisoft > ".$name_file;
+    $executa="$DirBase -h localhost -u root -pAac1989@ tis_teamscript > ".$name_file;
     system($executa,$resultado);
 	if ($resultado)  //si hay error
 	{
@@ -94,6 +97,7 @@ if(isset($_POST['nuevo'])){
 			header('Location: backup.php?backup=2&file='.$name_file);
 	}
 }
+
 if(isset($_POST['aceptar'])){
 	if(isset($_POST['archivo'])){
 		$backup_file=$directorio."/".$_POST['archivo'];
@@ -109,7 +113,8 @@ if(isset($_POST['aceptar'])){
 			{
 			    $DirBase=$DirBase."\bin\mysql";
 			}
-			$executa = "$DirBase -h webtisdb.cs.umss.edu.bo -u munisoft -pWSVBtmXg  tis_munisoft < $backup_file";
+			//$executa = "$DirBase -h webtisdb.cs.umss.edu.bo -u munisoft -pWSVBtmXg  tis_munisoft < $backup_file";
+			$executa = "$DirBase -h localhost -u root -pAac1989@  tis_teamscript < $backup_file";
 			system($executa,$resultado);
 			if ($resultado)  //si hay error
 			{
@@ -190,7 +195,11 @@ include('header.php');
              ?>
               </tbody>
             </table></br>
-		<button class="btn btn-success btn-setting"><i class="icon-backward"></i> Restaurar</button>  <button class="btn btn-primary btn-setting2" id="enviar_3"><i class="icon-plus"></i> Nuevo archivo de respaldo</button> <a href="javascript:history.back();" class="btn"><i class="icon-arrow-left"></i> Volver Atras</a>
+
+		<button class="btn btn-success btn-setting"><i class="icon-backward"></i> Restaurar</button>
+		<button class="btn btn-primary btn-setting2" id="enviar_3"><i class="icon-plus"></i> Nuevo archivo de respaldo</button>
+		<a href="javascript:history.back();" class="btn"><i class="icon-arrow-left"></i> Volver Atras</a>
+	    
 	    <div class="modal hide fade" id="myModal">
 			<div class="modal-header">
 				<button type="button" class="close" data-dismiss="modal">×</button>

@@ -22,7 +22,9 @@
     /*if($_POST["b".$counta]) {
       $b = 2;
     }*/
-    if (isset($_POST['jefeconsultor'])) {
+    //esto mas puso la ranga del adrinano
+    /*ACA SE HIZO UNA MOFIFICACION*/
+    if ($_POST['jefeconsultor']=="b".$counta) {
       $b= 2;
     }
 
